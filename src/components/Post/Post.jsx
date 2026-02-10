@@ -39,8 +39,16 @@ const Post = ({ post, index, onToggleComments }) => {
     <article className="post-container">
       <div className="post-content">
         <div className="post-metadata">
-          <span>Posted by <strong>u/{post.author}</strong></span>
+          <span className="subreddit-name">r/{post.subreddit}</span>
+          <span className="post-divider">•</span>
+
+          <span>Posted by <strong className="post-author">u/{post.author}</strong></span>
+          <span className="post-divider">•</span>
+
           <span className="post-time">{timeAgo}</span>
+
+          <span className="post-divider">•</span>
+          <span className="post-points">{post.ups.toLocaleString()} points</span>
         </div>
 
         <h2 className="post-title">{post.title}</h2>
@@ -117,7 +125,7 @@ const Post = ({ post, index, onToggleComments }) => {
                     <span className="comment-divider">•</span>
                     <span className="comment-ups">{comment.ups?.toLocaleString()} points</span>
                   </div>
-                  
+
                   <p className="comment-body">{comment.body}</p>
 
                   {/* Render Replies (First Level) */}
