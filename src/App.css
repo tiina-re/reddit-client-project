@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html { 
+  margin: 0; 
+  padding: 0; 
+  font-family: 'Segoe UI', Roboto, sans-serif; 
+  background-color: #DAE0E6; 
+  color: #1c1c1c; }
+
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* Main layout */
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 24px;
+}
+
+/* Content areas */
+
+main {
+  flex: 2;
+  min-width: 0;
+}
+
+aside {
+  flex: 1;
+  max-width: 312px;
+  min-width: 260px;
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-right: 4px; /* Space for the thin scrollbar */
+
+  /* 1. The Scrollbar Area */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* 2. The Background (Track) - Set this to match your page background (#DAE0E6) */
+  &::-webkit-scrollbar-track {
+    background: #DAE0E6; 
+  }
+
+  /* 3. The Moving Part (Thumb) */
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Subtle gray */
+    border-radius: 10px;
+    border: 2px solid #DAE0E6; /* Creates a "gap" look around the thumb */
+  }
+
+  /* 4. Hover effect */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #878a8c; 
+  }
+
+  /* Firefox Support */
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #DAE0E6;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  aside {
+    max-height: none;
+    position: static; 
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+

@@ -1,0 +1,135 @@
+.post-container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: border-color 0.2s;
+}
+
+.post-container:hover {
+  border-color: #878a8c;
+}
+
+.post-content {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.post-time {
+  font-size: 0.75rem ;
+  padding-left: 12px;
+}
+
+.post-author {
+  color: #2a2a2d;
+}
+
+.post-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 8px 0 12px 0;
+}
+
+/* Image styling to ensure it fits the card but stays big */
+.post-image-container {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.post-main-image, .post-main-video {
+  width: 100%;
+  max-height: 512px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  display: block;
+}
+
+.post-metadata {
+  display: flex;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #787c7e;
+}
+
+
+.post-footer {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  padding: 5px 0;
+}
+
+.footer-pill {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2d; /* Darker gray pill background */
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.footer-pill:hover {
+  background-color: #3f3f42;
+}
+
+.vote-pill {
+  gap: 8px;
+}
+
+.vote-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.comment-pill span, .share-pill span {
+  margin-left: 8px;
+}
+
+/* COMMENTS */
+
+.comment-section {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eeeeee;
+  }
+
+.comment-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #f6f7f8; 
+}
+
+.comment-body {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #1a1a1b; 
+}
+
+.comment-author {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #818384;
+  margin-bottom: 4px;
+}
+
+.loader-container {
+  text-align: center;
+  padding: 20px;
+  color: #ff4500; /* Reddit Orange */
+}

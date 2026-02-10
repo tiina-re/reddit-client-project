@@ -1,0 +1,23 @@
+
+.search-form {
+  display: flex;
+  width: 100%;
+  max-width: 600px; /* Keeps it from getting too wide on desktop */
+}
+
+.search-form input {
+  flex-grow: 1;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px 0 0 20px; 
+  outline: none;
+}
+
+.search-form button {
+  padding: 8px 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-left: none; /* Merges with input */
+  border-radius: 0 20px 20px 0; 
+  cursor: pointer;
+}
