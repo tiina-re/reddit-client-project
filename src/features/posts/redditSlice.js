@@ -16,8 +16,20 @@ export const fetchPosts = createAsyncThunk(
 export const fetchComments = createAsyncThunk(
   'reddit/fetchComments',
   async ({ index, permalink }) => {
-    const comments = await getPostComments(permalink);
-    return { index, comments };
+    //Get the already-mapped data from API helper
+    const commentsData = await getPostComments(permalink);
+    
+    // Just format the fields you want for UI
+    const formattedComments = commentsData.map((comment) => ({
+      id: comment.id,
+      author: comment.author,
+      body: comment.body,
+      ups: comment.ups,
+      created_utc: comment.created_utc,
+      replies: comment.replies ? comment.replies.data?.children : []
+    }));
+
+    return { index, comments: formattedComments };
   }
 );
 
@@ -39,6 +51,11 @@ const redditSlice = createSlice({
     setSelectedSubreddit: (state, action) => {
       state.selectedSubreddit = action.payload;
       state.searchTerm = '';  //To clear search when switching subreddits
+    },
+    updatePostVote: (state, action) => {
+      const { index, direction } = action.payload;
+
+      state.posts[index].ups += direction;
     }
   }, 
   extraReducers: (builder) => {
@@ -85,6 +102,6 @@ const redditSlice = createSlice({
   },
 });
 
-export const { setSearchTerm, setSelectedSubreddit } = redditSlice.actions;
+export const { setSearchTerm, setSelectedSubreddit, updatePostVote } = redditSlice.actions;
 export const selectSearchTerm = (state) => state.reddit.searchTerm;
 export default redditSlice.reducer;

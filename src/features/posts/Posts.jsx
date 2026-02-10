@@ -29,6 +29,7 @@ const Posts = () => {
                 <Post
                     key={post.id}
                     post={post}
+                    index={index}
                     onToggleComments={(permalink) => handleToggleComments(index, permalink)}
                 />
             ))}

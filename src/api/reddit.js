@@ -30,5 +30,5 @@ export const getPostComments = async (permalink) => {
   const json = await response.json();
 
   // Reddit returns comments in the second object of the response array
-  return json[1].data.children.map((subreddit) => subreddit.data);
+  return json[1].data.children.map((comment) => comment.data);
 };
