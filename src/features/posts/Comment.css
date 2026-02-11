@@ -1,0 +1,152 @@
+/* ==========================================
+   1. MAIN CONTAINER & LAYOUT
+   ========================================== */
+.post-detail-container {
+  padding: 16px;
+  background-color: white;
+}
+
+.back-button {
+  margin-bottom: 15px;
+  background: none;
+  border: 1px solid #ccc;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #f6f7f8;
+}
+
+.loader-container {
+  text-align: center;
+  padding: 40px;
+  color: #ff4500; /* Reddit Orange */
+  font-weight: bold;
+}
+
+/* ==========================================
+   2. COMMENT THREAD STRUCTURE
+   ========================================== */
+.comment-section {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #eeeeee;
+}
+
+.comment-thread {
+  margin-top: 15px;
+}
+
+.comment-thread.collapsed {
+  opacity: 0.6;
+  margin-bottom: 5px;
+}
+
+.comment-item {
+  padding: 12px 16px;
+  background-color: #ffffff; /* Clean white for items */
+  border-radius: 4px;
+}
+
+/* Recursive Indentation */
+.replies-indent {
+  margin-left: 12px;
+  border-left: 2px solid #edeff1; /* The "thread" line */
+  padding-left: 15px;
+  margin-top: 10px;
+  transition: border-color 0.2s;
+}
+
+.replies-indent:hover {
+  border-left-color: #0079d3; /* Highlighting the thread path */
+}
+
+/* ==========================================
+   3. METADATA (Header of the comment)
+   ========================================== */
+.comment-metadata {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  font-size: 0.85rem;
+  color: #787c7e;
+  margin-bottom: 4px;
+  padding: 4px 0;
+}
+
+.collapse-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #0079d3;
+  transition: transform 0.2s ease;
+}
+
+.collapse-icon:hover {
+  transform: scale(1.1);
+}
+
+.comment-author {
+  font-weight: bold;
+  color: #1a1a1b;
+}
+
+.comment-time, .comment-ups {
+  color: #787c7e;
+}
+
+/* ==========================================
+   4. CONTENT & ACTIONS
+   ========================================== */
+.comment-body {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #1a1a1b;
+  margin: 0;
+}
+
+.comment-body p {
+  margin: 4px 0;
+}
+
+/* Voting Row */
+.comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.comment-vote-btn {
+  background: none;
+  border: none;
+  color: #878a8c;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.comment-vote-btn:hover.up {
+  color: #ff4500;
+  background-color: #f6f7f8;
+}
+
+.comment-vote-btn:hover.down {
+  color: #7193ff;
+  background-color: #f6f7f8;
+}
+
+.comment-score {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #1a1a1b;
+}

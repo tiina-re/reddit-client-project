@@ -1,18 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import './Post.css';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import { FaArrowUp, FaArrowDown, FaRegCommentAlt, FaShare } from 'react-icons/fa';
 import { updatePostVote } from '../../features/posts/redditSlice';
-import moment from 'moment';
+import './Post.css';
 
-const Post = ({ post, index, onToggleComments }) => {
+const Post = ({ post, index }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [voteValue, setVoteValue] = useState(0);
+  
+  const [isTruncated, setIsTruncated] = useState(false);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const element = textRef.current;
+    if (element) {
+      // If the actual content height is greater than the visible (clamped) height
+      if (element.scrollHeight > element.offsetHeight) {
+        setIsTruncated(true);
+      }
+    }
+  }, [post.selftext]);
 
   const timeAgo = moment.unix(post.created_utc).fromNow();
   const hasImage = post.post_hint === 'image' || post.url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 
-  const handleVote = (direction) => {
+  const handleVote = (e, direction) => {
+    e.stopPropagation();
     if (voteValue === direction) {
       dispatch(updatePostVote({ index, direction: -direction }));
       setVoteValue(0);
@@ -23,58 +39,65 @@ const Post = ({ post, index, onToggleComments }) => {
     }
   };
 
-  const handleShare = () => {
+  const handleShare = (e) => {
+    e.stopPropagation();
     const url = `https://www.reddit.com${post.permalink}`;
     navigator.clipboard.writeText(url);
     alert("Link copied to clipboard!");
   };
 
-  const handleCommentClick = () => {
-    if (typeof onToggleComments === 'function') {
-      onToggleComments(post.permalink);
-    }
+  const handleOpenPost = () => {
+    navigate(`/comments/${post.id}`);
   };
 
   return (
-    <article className="post-container">
+    <article className="post-container" onClick={handleOpenPost}>
       <div className="post-content">
         <div className="post-metadata">
           <span className="subreddit-name">r/{post.subreddit}</span>
           <span className="post-divider">•</span>
-
           <span>Posted by <strong className="post-author">u/{post.author}</strong></span>
           <span className="post-divider">•</span>
-
           <span className="post-time">{timeAgo}</span>
-
-          <span className="post-divider">•</span>
-          <span className="post-points">{post.ups.toLocaleString()} points</span>
         </div>
 
         <h2 className="post-title">{post.title}</h2>
 
-        {/* Image Rendering */}
+        {post.selftext && (
+          <div className="post-body-container">
+            <p 
+              ref={textRef} 
+              className="post-selftext-preview"
+            >
+              {post.selftext}
+            </p>
+            {isTruncated && (
+              <span className="read-more-link">
+                Read More...
+              </span>
+            )}
+          </div>
+        )}
+
         {hasImage && (
           <div className="post-image-container">
             <img src={post.url} alt={post.title} className="post-main-image" />
           </div>
         )}
 
-        {/* Video Rendering */}
         {post.is_video && post.media?.reddit_video && (
-          <div className="post-video-container">
+          <div className="post-video-container" onClick={(e) => e.stopPropagation()}>
             <video controls className="post-main-video">
               <source src={post.media.reddit_video.fallback_url} type="video/mp4" />
             </video>
           </div>
         )}
 
-        {/* Footer Actions */}
         <div className="post-footer">
           <div className="footer-pill vote-pill">
             <button
               className={`vote-button up ${voteValue === 1 ? 'active-up' : ''}`}
-              onClick={() => handleVote(1)}
+              onClick={(e) => handleVote(e, 1)}
             >
               <FaArrowUp />
             </button>
@@ -83,16 +106,13 @@ const Post = ({ post, index, onToggleComments }) => {
             </span>
             <button
               className={`vote-button down ${voteValue === -1 ? 'active-down' : ''}`}
-              onClick={() => handleVote(-1)}
+              onClick={(e) => handleVote(e, -1)}
             >
               <FaArrowDown />
             </button>
           </div>
 
-          <button
-            className={`footer-pill comment-pill ${post.showingComments ? 'active' : ''}`}
-            onClick={handleCommentClick}
-          >
+          <button className="footer-pill comment-pill" onClick={handleOpenPost}>
             <FaRegCommentAlt />
             <span>{post.num_comments}</span>
           </button>
@@ -102,63 +122,6 @@ const Post = ({ post, index, onToggleComments }) => {
             <span>Share</span>
           </button>
         </div>
-
-        {/* --- COMMENT SECTION --- */}
-        {post.showingComments && (
-          <div className="comment-section">
-            <hr />
-            {post.loadingComments ? (
-              <div className="loader-container">
-                <p>Loading comments...</p>
-              </div>
-            ) : post.errorComments ? (
-              <p className="error">Error loading comments.</p>
-            ) : (
-              post.comments.map((comment) => (
-                <div key={comment.id} className="comment-item">
-                  <div className="comment-metadata">
-                    <span className="comment-author">u/{comment.author}</span>
-                    <span className="comment-divider">•</span>
-                    <span className="comment-time">
-                      {moment.unix(comment.created_utc).fromNow()}
-                    </span>
-                    <span className="comment-divider">•</span>
-                    <span className="comment-ups">{comment.ups?.toLocaleString()} points</span>
-                  </div>
-
-                  <p className="comment-body">{comment.body}</p>
-
-                  {/* Render Replies (First Level) */}
-                  {comment.replies && comment.replies.length > 0 && (
-                    <div className="replies-container">
-                      {comment.replies.map((reply) => {
-                        // Skip Reddit's "load more" placeholders
-                        if (reply.kind === 'more') return null;
-
-                        return (
-                          <div key={reply.data.id} className="reply-item">
-                            <div className="comment-metadata">
-                              <span className="comment-author">u/{reply.data.author}</span>
-                              <span className="comment-divider">•</span>
-                              <span className="comment-time">
-                                {moment.unix(reply.data.created_utc).fromNow()}
-                              </span>
-                              <span className="comment-divider">•</span>
-                              <span className="comment-ups">
-                                {reply.data.ups?.toLocaleString()} points
-                              </span>
-                            </div>
-                            <p className="comment-body">{reply.data.body}</p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              ))
-            )}
-          </div>
-        )}
       </div>
     </article>
   );

@@ -31,8 +31,9 @@ body, html {
 /* Content areas */
 
 main {
-  flex: 2;
+  flex: 1;
   min-width: 0;
+  max-width: 800px;
 }
 
 aside {
@@ -43,23 +44,23 @@ aside {
   top: 80px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
-  padding-right: 4px; /* Space for the thin scrollbar */
+  padding-right: 4px; 
 
   /* 1. The Scrollbar Area */
   &::-webkit-scrollbar {
     width: 6px;
   }
 
-  /* 2. The Background (Track) - Set this to match your page background (#DAE0E6) */
+  /* 2. The Background */
   &::-webkit-scrollbar-track {
     background: #DAE0E6; 
   }
 
   /* 3. The Moving Part (Thumb) */
   &::-webkit-scrollbar-thumb {
-    background-color: #ccc; /* Subtle gray */
+    background-color: #ccc; 
     border-radius: 10px;
-    border: 2px solid #DAE0E6; /* Creates a "gap" look around the thumb */
+    border: 2px solid #DAE0E6;
   }
 
   /* 4. Hover effect */
