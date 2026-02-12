@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSubreddits, selectSubreddits } from './subredditsSlice';
 import { setSelectedSubreddit, fetchPosts } from '../posts/redditSlice';
@@ -6,9 +7,9 @@ import './Subreddits.css';
 
 const Subreddits = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const subreddits = useSelector(selectSubreddits);
 
-    //Fetch subreddits when the component mounts
     useEffect(() => {
         dispatch(fetchSubreddits());
     }, [dispatch]);
@@ -24,6 +25,7 @@ const Subreddits = () => {
                             onClick={() => {
                                 dispatch(setSelectedSubreddit(subreddit.url));
                                 dispatch(fetchPosts({ subreddit: subreddit.url, searchTerm: '' }));
+                                navigate('/');
                             }}
                         >
                             <img

@@ -24,6 +24,14 @@
   transition: background-color 0.2s;
 }
 
+.back-button:focus {
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
 .back-btn-pill:hover {
   display: inline-flex;
   background-color: #ffffff;
