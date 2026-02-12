@@ -1,6 +1,4 @@
-/* ==========================================
-   1. MAIN CONTAINER & LAYOUT
-   ========================================== */
+/*   1. MAIN CONTAINER & LAYOUT  */
 .post-detail-container {
   padding: 16px;
   background-color: white;
@@ -23,13 +21,12 @@
 .loader-container {
   text-align: center;
   padding: 40px;
-  color: #ff4500; /* Reddit Orange */
+  color: #3b3b3b; /* Reddit Orange */
   font-weight: bold;
 }
 
-/* ==========================================
-   2. COMMENT THREAD STRUCTURE
-   ========================================== */
+/*  2. COMMENT THREAD STRUCTURE */
+
 .comment-section {
   margin-top: 20px;
   padding-top: 10px;
@@ -61,12 +58,10 @@
 }
 
 .replies-indent:hover {
-  border-left-color: #0079d3; /* Highlighting the thread path */
+  border-left-color: #74b8cc; 
 }
 
-/* ==========================================
-   3. METADATA (Header of the comment)
-   ========================================== */
+/*  3. METADATA (Header of the comment)  */
 .comment-metadata {
   display: flex;
   align-items: center;
@@ -83,7 +78,7 @@
   align-items: center;
   font-size: 1rem;
   cursor: pointer;
-  color: #0079d3;
+  color: #42a3c0;
   transition: transform 0.2s ease;
 }
 
@@ -100,9 +95,7 @@
   color: #787c7e;
 }
 
-/* ==========================================
-   4. CONTENT & ACTIONS
-   ========================================== */
+/*  4. CONTENT & ACTIONS  */
 .comment-body {
   font-size: 0.95rem;
   line-height: 1.5;
@@ -133,16 +126,6 @@
   align-items: center;
   border-radius: 4px;
   transition: background-color 0.2s, color 0.2s;
-}
-
-.comment-vote-btn:hover.up {
-  color: #ff4500;
-  background-color: #f6f7f8;
-}
-
-.comment-vote-btn:hover.down {
-  color: #7193ff;
-  background-color: #f6f7f8;
 }
 
 .comment-score {

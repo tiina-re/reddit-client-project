@@ -14,19 +14,15 @@
 .logo {
   padding: 1.5em;
   font-weight: bold;
-  color: #FF4500;
+  font-size: 1.6em;
   display: flex;
   align-items: center;
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
   cursor: pointer;
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 .reddit-text {
-  color: #FF4500;
+  color: #0f0f0f;
 }

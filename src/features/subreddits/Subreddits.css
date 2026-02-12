@@ -3,7 +3,7 @@
   align-self: flex-start;
   padding: 16px;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   overflow: hidden;
 }
@@ -11,7 +11,7 @@
 .subreddits-card h2 {
   font-size: 0.8rem;
   font-weight: bold;
-  padding: 12px;
+  padding: 10px;
   margin: 0;
   text-transform: uppercase;
   color: #787c7e;
@@ -27,14 +27,14 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 8px 12px;
+  padding: 12px 12px;
   gap: 10px;
   border: none;
   background: transparent;
   cursor: pointer;
   font-weight: bold;
   text-align: left;
-  border-radius: 4px;
+  border-radius: 12px;
   margin: 2px 0;
   transition: background 0.2s ease;
   font-size: 0.9rem;
@@ -42,7 +42,9 @@
 }
 
 .subreddits-list li button:hover {
-  background-color: #f6f7f8;
+  background-color: #ffffff;
+  box-shadow: 0 1px 8px #a8c9d4;
+  border: 1px solid #e6e6e6;
 }
 
 .subreddit-icon {
@@ -53,6 +55,14 @@
 }
 
 .subreddit-active {
-  background-color: #f0f0f0;
-  border-left: 4px solid #ff4500 !important;
+  background-color: #c9f2ff;
+  border: 1px solid #c9f2ff;
+  outline: none;
+}
+
+.subreddits-list li button:focus {
+  background-color: #ffffff;
+  box-shadow: 0 1px 8px #a2e9ff;
+  border: 1px solid #e6e6e6;
+  outline: none;
 }

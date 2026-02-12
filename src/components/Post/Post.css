@@ -3,19 +3,23 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 16px;
   padding: 16px;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 6px #deebf0;
+  border: 1px solid #e6e6e6;
   transition: border-color 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  outline: none;
 }
 
 .post-container:hover {
-  border-color: #878a8c;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-self: auto;
+  border: 1px solid #ffffff;
+  box-shadow: 0 1px 10px #d0e5ec;
+  border: 1px solid #e6e6e6;
 }
 
 /*  2. HEADER & METADATA (Top Row)  */
@@ -50,6 +54,7 @@
 /*  3. CONTENT (Title, Media, Body)  */
 .post-content {
   text-align: left;
+  padding: 10px;
 }
 
 .post-title {
@@ -101,11 +106,11 @@
 .footer-pill {
   display: flex;
   align-items: center;
-  background-color: #f6f7f8;
+  background-color: #ebf3f5;
   border: none;
   border-radius: 20px;
-  color: #1a1a1b;
-  padding: 6px 12px;
+  color: #62838d;
+  padding: 6px 18px;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 700;
@@ -113,37 +118,44 @@
 }
 
 .footer-pill:hover {
-  background-color: #e3e4e5;
+  background-color: #e0f8ff;
 }
 
 /* Vote Specifics */
 .vote-pill {
-  gap: 8px;
+  gap: 6px;
 }
 
 .vote-button {
   background: none;
   border: none;
-  color: #878a8c;
+  color: #62838d;
   cursor: pointer;
   display: flex;
   align-items: center;
   font-size: 1.1rem;
+  padding: 4px 8px;
 }
 
 .vote-button.active-up,
 .post-votes.up {
-  color: #ff4500;
-  /* Reddit Upvote Orange */
+  color: #0080e9;
 }
 
 .vote-button.active-down,
 .post-votes.down {
-  color: #7193ff;
-  /* Reddit Downvote Blue */
+  color: #c97200;
+}
+
+.comment-pill {
+
+}
+
+.share-pill {
+  
 }
 
 .comment-pill span,
 .share-pill span {
-  margin-left: 6px;
+  margin-left: 8px;
 }

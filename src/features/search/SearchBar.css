@@ -2,22 +2,33 @@
 .search-form {
   display: flex;
   width: 100%;
-  max-width: 600px; /* Keeps it from getting too wide on desktop */
+  max-width: 600px;
+  box-shadow: #26393f;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
 }
 
 .search-form input {
   flex-grow: 1;
   padding: 8px 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #e6e6e6;
   border-radius: 20px 0 0 20px; 
   outline: none;
+  background-color: #ffffff; 
+  color: #26393f;
+}
+
+.search-form:hover {
+  background-color: #ffffff;
+  box-shadow: 0 1px 6px #a8c9d4;
+  border: 1px solid #e6e6e6;
 }
 
 .search-form button {
   padding: 8px 16px;
   background-color: #f8f9fa;
-  border: 1px solid #ccc;
-  border-left: none; /* Merges with input */
+  border: 1px solid #e6e6e6;
+  border-left: none; 
   border-radius: 0 20px 20px 0; 
   cursor: pointer;
 }

@@ -72,8 +72,7 @@ const Post = ({ post, index }) => {
               {post.selftext}
             </p>
             {isTruncated && (
-              <span className="read-more-link">
-                Read More...
+              <span className="read-more-link"> 
               </span>
             )}
           </div>
