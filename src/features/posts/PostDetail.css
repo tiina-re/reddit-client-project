@@ -1,10 +1,10 @@
 /*  1. PAGE WRAPPER & NAVIGATION   */
 .post-detail-container {
   background-color: white;
-  border-radius: 8px;
   padding: 20px;
   margin-top: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(211, 211, 211, 0.3);
 }
 
 .back-btn-pill {
@@ -39,7 +39,6 @@ button:focus {
   border: 1px solid #eeeeee;
 }
 
-/*  2. DETAILED POST CONTENT  */
 .post-selftext {
   padding: 15px 0;
   font-size: 16px;
@@ -49,13 +48,11 @@ button:focus {
   border-bottom: 1px solid #edeff1;
 }
 
-/* Preserves Reddit's paragraph breaks and spacing */
 .post-selftext p {
   white-space: pre-wrap;
   margin-bottom: 12px;
 }
 
-/* 3. COMMENT SECTION LAYOUT  */
 .comment-section-detailed {
   margin-top: 24px;
 }
@@ -79,8 +76,6 @@ button:focus {
 .comments-list {
   margin-top: 10px;
 }
-
-/*    4. STATES (Error, Loading, Empty)   */
 
 .error-container,
 .loader-container,

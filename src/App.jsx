@@ -11,13 +11,10 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-        <div className="container"> 
+        <div className="container">
           <main>
             <Routes>
-              {/* Main Feed View */}
               <Route path="/" element={<Posts />} />
-              
-              {/* Detailed Post View */}
               <Route path="/comments/:postId" element={<PostDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

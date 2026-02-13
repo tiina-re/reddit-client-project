@@ -1,13 +1,13 @@
-/*  1. MAIN CARD CONTAINER  */
 .post-container {
   display: flex;
   flex-direction: column;
   background-color: white;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-bottom: 16px;
-  padding: 12px;
+  margin: 8px;
+  padding: 16px;
   width: 100%;
-  box-shadow: 0 1px 6px #deebf0;
+  box-shadow: 0 2px 5px rgba(211, 211, 211, 0.3);
   border: 1px solid #e6e6e6;
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
@@ -18,12 +18,11 @@
 
 .post-container:hover {
   border: 1px solid #ffffff;
-  box-shadow: 0 1px 10px #d0e5ec;
+  box-shadow: 0 1px 10px #bfdbe4;
   border: 1px solid #e6e6e6;
   transform: translateY(-1px);
 }
 
-/*  2. HEADER & METADATA (Top Row)  */
 .post-metadata {
   display: flex;
   align-items: center;
@@ -52,7 +51,6 @@
   padding: 0 2px;
 }
 
-/*  3. CONTENT (Title, Media, Body)  */
 .post-content {
   text-align: left;
   padding: 10px;
@@ -70,7 +68,7 @@
   width: 100%;
   margin-top: 10px;
   background-color: #f8f9fa;
-  border-radius: 4px;
+  border-radius: 16px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -96,7 +94,7 @@
   word-break: break-word;
 }
 
-/*  4. FOOTER (Actions/Pills)  */
+
 .post-footer {
   display: flex;
   flex-wrap: wrap;
@@ -123,7 +121,7 @@
   background-color: #e0f8ff;
 }
 
-/* Vote Specifics */
+
 .vote-pill {
   gap: 6px;
 }

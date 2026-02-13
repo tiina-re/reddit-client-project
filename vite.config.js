@@ -8,5 +8,11 @@ export default defineConfig({
       usePolling: true, 
       interval: 100, 
     }
-  }
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    exclude: ['**/node_modules/**', '**/tests/**'],
+    setupFiles: './src/setupTests.js',
+  },
 })

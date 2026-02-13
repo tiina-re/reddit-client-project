@@ -24,8 +24,8 @@
 
 .search-form:hover {
   background-color: #ffffff;
-  box-shadow: 0 1px 6px #a8c9d4;
-  border: 1px solid #e6e6e6;
+  border: none;
+  box-shadow: 0 1px 8px #bfdbe4;
   border-radius: 20px;
 }
 
