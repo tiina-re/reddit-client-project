@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# Reddit-Lite Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A functional, responsive Reddit client built with **React** and **Redux Toolkit**. This application utilizes the Reddit JSON API to fetch and display real-time community data, providing a seamless browsing experience.
 
-Currently, two official plugins are available:
+## Wireframes
+The application follows a classic "Feed and Sidebar" layout:
+* **Main Feed**: Central column for posts with functional upvote/downvote displays.
+* **Sidebar**: Navigation for subreddits and community categories.
+* **Search**: Top-level navigation bar for real-time post filtering.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+* **React**: Frontend library for building the user interface.
+* **Redux Toolkit**: Managed global state for posts, search terms, and subreddit selection.
+* **React Router (v6)**: Handles navigation between the main feed and detailed post views.
+* **CSS3**: Custom styling, including:
+    * **Shimmering Loading Skeletons** to improve perceived performance.
+    * **Custom Webkit Scrollbars** for a consistent, polished look.
+    * **Responsive Flexbox/Grid** layouts.
+* **Reddit JSON API**: Data source for real-time Reddit content.
 
-## React Compiler
+## Features
+* **Real-time Data**: Fetches live posts from various subreddits.
+* **Subreddit Navigation**: Click any subreddit in the sidebar to instantly update the feed.
+* **Live Search**: A functional search bar that filters the current feed using Redux state.
+* **Visual Polish**: Integrated Loading Skeletons with shimmer effects to provide a smooth user experience during data transitions.
+* **Intelligent Routing**: Automatically redirects users from the detail view back to the main feed when a new subreddit is selected.
+* **Responsive Design**: Fully functional across mobile, tablet, and desktop views.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## How to Run
 
-## Expanding the ESLint configuration
+1. **Clone the repo**:
+   ```bash
+   git clone [https://github.com/tiina-re/reddit-client-project.git](https://github.com/tiina-re/reddit-client-project.git)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. **Install dependencies**:
+Bash
+npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+3. **Start the development server**:
+Bash
+npm start
+Open in browser:
+Navigate to http://localhost:3000
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Future Work
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Scoped Search: Enhance the search functionality to allow users to search for keywords within a specifically selected subreddit, rather than just filtering the current view.
+- Post Sorting & Filtering: Implement the ability to sort posts by Hot, New, Top, and Rising. This will involve updating the API logic to fetch different endpoints (e.g., reddit.com/r/pics/top.json).
+- Dark Mode: Adding a theme switcher for better accessibility.
+- Infinite Scroll: Moving from static fetching to a continuous scroll experience.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Lessons Learned
+During development, I overcame several technical hurdles:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Routing Logic: Solved "Post Not Found" errors by ensuring the app navigates back to the main feed whenever a new subreddit is selected from the detail view.
+- CSS Refinement: Overrode default browser focus outlines and dark scrollbar backgrounds to maintain a clean, custom design system.
+- Component Composition: Broke the app down from one giant file into smaller, reusable components like Post, SearchBar, and Subreddits. This made debugging issues much faster because the logic was isolated.
+- Global vs. Local State: Had to decide which data should live in Redux (like the selectedSubreddit) and which should stay local (like a simple toggle). This helped me understand when to use a global store versus standard React useState.
