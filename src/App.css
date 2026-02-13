@@ -9,6 +9,9 @@ html {
   font-family: 'Segoe UI', Roboto, sans-serif;
   background-color: #f0f0f0;
   color: #363636;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 #root {
@@ -26,9 +29,10 @@ html {
   align-items: flex-start;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 16px;
   gap: 24px;
-  
+  width: 100%;
+
 }
 
 /* Content areas */
@@ -36,7 +40,8 @@ html {
 main {
   flex: 1;
   min-width: 0;
-  max-width: 800px;
+  max-width: 740px;
+  width: 100%;
 }
 
 
@@ -51,27 +56,27 @@ aside {
   padding-right: 4px;
 }
 
-  aside::-webkit-scrollbar {
-    width: 10px;
-  }
+aside::-webkit-scrollbar {
+  width: 10px;
+}
 
-  aside::-webkit-scrollbar-track {
-    background: #dfdfdf;
-    border-radius: 10px;
-    
-  }
+aside::-webkit-scrollbar-track {
+  background: #dfdfdf;
+  border-radius: 10px;
 
-  aside::-webkit-scrollbar-thumb {
-    background-color:  #afc9cf;
-    border-radius: 10px;
-    border: 1px solid #f0f0f0;
-    cursor: pointer;
-  }
+}
 
-  aside::-webkit-scrollbar-thumb:hover {
-    background-color: #b6d8e2;
-    border: 1px solid #f0f0f0;
-  }
+aside::-webkit-scrollbar-thumb {
+  background-color: #afc9cf;
+  border-radius: 10px;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+aside::-webkit-scrollbar-thumb:hover {
+  background-color: #b6d8e2;
+  border: 1px solid #f0f0f0;
+}
 
 .read-the-docs {
   color: #afafaf;
@@ -80,14 +85,44 @@ aside {
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 2;
+  }
+
+  main>div {
+    width: 100%;
+    max-width: 500px;
   }
 
   aside {
     max-height: none;
     position: static;
     width: 100%;
-    max-width: none;
+    max-width: 100%;
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0;
+    background-color: white;
+    margin-bottom: 10px;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+
 }
 
 @keyframes logo-spin {

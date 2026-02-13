@@ -5,21 +5,22 @@
   background-color: white;
   border-radius: 12px;
   margin-bottom: 16px;
-  padding: 16px;
+  padding: 12px;
   width: 100%;
   box-shadow: 0 1px 6px #deebf0;
   border: 1px solid #e6e6e6;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   outline: none;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .post-container:hover {
-  display: flex;
-  align-self: auto;
   border: 1px solid #ffffff;
   box-shadow: 0 1px 10px #d0e5ec;
   border: 1px solid #e6e6e6;
+  transform: translateY(-1px);
 }
 
 /*  2. HEADER & METADATA (Top Row)  */
@@ -98,6 +99,7 @@
 /*  4. FOOTER (Actions/Pills)  */
 .post-footer {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 15px;
   padding: 5px 0;
