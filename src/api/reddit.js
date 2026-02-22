@@ -1,12 +1,12 @@
 export const API_ROOT = 'https://www.reddit.com';
 
-/**
- * Utility to fetch data using a CORS proxy.
+/* Utility to fetch data using a CORS proxy.
  */
 const fetchFromReddit = async (endpoint) => {
-  const response = await fetch(`https://corsproxy.io/?${API_ROOT}${endpoint}`);
+  const response = await fetch(`${API_ROOT}${endpoint}`);
+  
   if (!response.ok) {
-    throw new Error('Network response was not ok');
+    throw new Error(`Network response was not ok: ${response.status}`);
   }
   return await response.json();
 };
