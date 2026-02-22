@@ -11,7 +11,7 @@ const fetchFromReddit = async (endpoint) => {
 
 export const getSubredditPosts = async (subreddit) => {
   const path = subreddit || '/r/popular';
-  const json = await fetchFromReddit(`${path}.json`);
+  const json = await fetchFromReddit(`${path}/.json`);
   return json.data.children.map((post) => post.data);
 };
 
@@ -21,7 +21,7 @@ export const getSearchResults = async (searchTerm) => {
 };
 
 export const getSubreddits = async () => {
-  const json = await fetchFromReddit('/subreddits.json');
+  const json = await fetchFromReddit('/subreddits/.json');
   return json.data.children.map((subreddit) => subreddit.data);
 };
 
