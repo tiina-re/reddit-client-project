@@ -1,34 +1,28 @@
-const isProduction = window.location.hostname !== 'localhost';
-
-export const API_ROOT = isProduction 
-  ? 'https://api.allorigins.win/get?url=' 
-  : 'https://proxy.cors.sh/https://www.reddit.com/';
+const PROXY_URL = 'https://api.allorigins.win/get?url=';
 
 const fetchFromReddit = async (endpoint) => {
-  const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+  const redditUrl = `https://www.reddit.com/${endpoint.replace(/^\//, '')}`;
+  const finalUrl = `${PROXY_URL}${encodeURIComponent(redditUrl)}`;
+
+  const response = await fetch(finalUrl);
   
-  if (isProduction) {
- 
-    const targetUrl = encodeURIComponent(`https://www.reddit.com/${cleanEndpoint}`);
-    const response = await fetch(`${API_ROOT}${targetUrl}`);
-    
-    if (!response.ok) throw new Error('Proxy error');
-    
-    const json = await response.json();
-    return JSON.parse(json.contents);
-  } else {
-    const response = await fetch(`${API_ROOT}${cleanEndpoint}`, {
-      headers: { 'x-cors-gratis': 'true' }
-    });
-    if (!response.ok) throw new Error('Local proxy error');
-    return await response.json();
+  if (!response.ok) {
+    throw new Error(`Proxy error: ${response.status}`);
+  }
+
+  const wrapper = await response.json();
+  
+  try {
+    return JSON.parse(wrapper.contents);
+  } catch (e) {
+    throw new Error("Reddit blocked the request. Try again in a few minutes.");
   }
 };
 
 export const getSubredditPosts = async (subreddit) => {
-  const path = subreddit || 'r/popular';
-  const data = await fetchFromReddit(`${path}.json`);
-  return data.data.children.map((post) => post.data);
+  const path = subreddit ? `${subreddit}.json` : 'r/popular.json';
+  const json = await fetchFromReddit(path);
+  return json.data.children.map((post) => post.data);
 };
 
 export const getSearchResults = async (searchTerm) => {
@@ -37,8 +31,8 @@ export const getSearchResults = async (searchTerm) => {
 };
 
 export const getSubreddits = async () => {
-  const data = await fetchFromReddit('subreddits.json');
-  return data.data.children.map((subreddit) => subreddit.data);
+  const json = await fetchFromReddit('subreddits.json');
+  return json.data.children.map((subreddit) => subreddit.data);
 };
 
 export const getPostComments = async (permalink) => {
