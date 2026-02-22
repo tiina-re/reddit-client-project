@@ -1,11 +1,17 @@
-export const API_ROOT = 'https://proxy.cors.sh/https://www.reddit.com';
+const isProduction = window.location.hostname !== 'localhost';
+
+export const API_ROOT = isProduction 
+  ? '/reddit-api' 
+  : 'https://proxy.cors.sh/https://www.reddit.com';
 
 const fetchFromReddit = async (endpoint) => {
-  const response = await fetch(`${API_ROOT}${endpoint}`, {
-    headers: {
-      'x-cors-gratis': 'true'
-    }
-  });
+  const url = `${API_ROOT}${endpoint}`;
+
+  const options = {
+    headers: isProduction ? {} : { 'x-cors-gratis': 'true' }
+  };
+
+  const response = await fetch(url, options);
   
   if (!response.ok) {
     throw new Error(`Network response was not ok: ${response.status}`);
@@ -14,7 +20,7 @@ const fetchFromReddit = async (endpoint) => {
 };
 
 export const getSubredditPosts = async (subreddit) => {
-  const path = subreddit || '/r/popular';
+  const path = subreddit ? `/${subreddit}` : '/r/popular';
   const json = await fetchFromReddit(`${path}.json`);
   return json.data.children.map((post) => post.data);
 };
