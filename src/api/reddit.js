@@ -5,24 +5,29 @@ export const API_ROOT = isProduction
   : 'https://proxy.cors.sh/https://www.reddit.com';
 
 const fetchFromReddit = async (endpoint) => {
-  const url = `${API_ROOT}${endpoint}`;
-
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${API_ROOT}${cleanEndpoint}`;
+  
   const options = {
-    headers: isProduction ? {} : { 'x-cors-gratis': 'true' }
+    headers: {
+      'User-Agent': 'TrRedditClient/1.0.0',
+      ...(isProduction ? {} : { 'x-cors-gratis': 'true' })
+    }
   };
 
   const response = await fetch(url, options);
   
   if (!response.ok) {
-    throw new Error(`Network response was not ok: ${response.status}`);
+    throw new Error(`Reddit API error: ${response.status}`);
   }
   return await response.json();
 };
 
 export const getSubredditPosts = async (subreddit) => {
   const path = subreddit ? `/${subreddit}` : '/r/popular';
-  const json = await fetchFromReddit(`${path}.json`);
-  return json.data.children.map((post) => post.data);
+  return await fetchFromReddit(`${path}.json`).then(json => 
+    json.data.children.map((post) => post.data)
+  );
 };
 
 export const getSearchResults = async (searchTerm) => {
