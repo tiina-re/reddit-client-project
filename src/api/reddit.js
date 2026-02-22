@@ -1,17 +1,16 @@
 const isProduction = window.location.hostname !== 'localhost';
 
 export const API_ROOT = isProduction 
-  ? '/reddit-api' 
+  ? 'https://api.allorigins.win/raw?url=https://www.reddit.com' 
   : 'https://proxy.cors.sh/https://www.reddit.com';
 
 const fetchFromReddit = async (endpoint) => {
-  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  const url = `${API_ROOT}${cleanEndpoint}`;
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+  const url = `${API_ROOT}/${cleanEndpoint}`;
   
   const options = {
     headers: {
-      'User-Agent': 'TrRedditClient/1.0.0',
-      ...(isProduction ? {} : { 'x-cors-gratis': 'true' })
+      ...(!isProduction && { 'x-cors-gratis': 'true' })
     }
   };
 
@@ -24,7 +23,7 @@ const fetchFromReddit = async (endpoint) => {
 };
 
 export const getSubredditPosts = async (subreddit) => {
-  const path = subreddit ? `/${subreddit}` : '/r/popular';
+  const path = subreddit || 'r/popular';
   return await fetchFromReddit(`${path}.json`).then(json => 
     json.data.children.map((post) => post.data)
   );
@@ -36,7 +35,7 @@ export const getSearchResults = async (searchTerm) => {
 };
 
 export const getSubreddits = async () => {
-  const json = await fetchFromReddit('/subreddits.json');
+  const json = await fetchFromReddit('subreddits.json');
   return json.data.children.map((subreddit) => subreddit.data);
 };
 
