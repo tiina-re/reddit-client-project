@@ -1,4 +1,6 @@
-const PROXY_BASE_URL = 'http://localhost:5000/api/reddit';
+const PROXY_BASE_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:5000/api/reddit' 
+  : 'https://reddit-client-project.onrender.com';
 
 const fetchFromReddit = async (endpoint) => {
   // Regex to strip any leading slashes and ANY existing .json occurrences
