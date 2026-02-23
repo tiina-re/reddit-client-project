@@ -1,3 +1,10 @@
+const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+
 app.get('/api/reddit/*', async (req, res) => {
     await new Promise(resolve => setTimeout(resolve, 2000));
 
@@ -18,10 +25,7 @@ app.get('/api/reddit/*', async (req, res) => {
             headers: {
                 'User-Agent': 'web:reddit-clone-app:v1.0 (by /u/tiina_re)',
                 'Accept': 'application/json',
-                'Accept-Language': 'en-US,en;q=0.9',
                 'Referer': 'https://www.reddit.com/',
-                'Origin': 'https://www.reddit.com',
-                'Cache-Control': 'no-cache'
             }
         });
         res.json(response.data);
@@ -33,3 +37,6 @@ app.get('/api/reddit/*', async (req, res) => {
         });
     }
 });
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Proxy running on port ${PORT}`));
