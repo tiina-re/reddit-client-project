@@ -8,9 +8,11 @@ const Posts = () => {
     const dispatch = useDispatch();
     const { posts, isLoading, error, selectedSubreddit, searchTerm } = useSelector((state) => state.reddit);
 
-    useEffect(() => {
-        dispatch(fetchPosts({ subreddit: selectedSubreddit, searchTerm }));
-    }, [selectedSubreddit, searchTerm, dispatch]);
+useEffect(() => {
+    if (!searchTerm) {
+        dispatch(fetchPosts({ subreddit: selectedSubreddit, searchTerm: '' }));
+    }
+}, [selectedSubreddit, searchTerm, dispatch]);
 
     if (isLoading) {
         return (
